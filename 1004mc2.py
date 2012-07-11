@@ -151,29 +151,29 @@ numMonthsOfSupply.append(numCompActive[1] / absorpRate[1])
 numMonthsOfSupply.append(numCompActive[2] / absorpRate[2])
 
 medianSalesPrice = [] #Median Comparable Sale Price
-medianSalesPrice.append(median(sorted([x.SellingPrice for x in prior7To12MonthsSaleList])))
-medianSalesPrice.append(median(sorted([x.SellingPrice for x in prior4To6MonthsSaleList])))
-medianSalesPrice.append(median(sorted([x.SellingPrice for x in prior3MonthsSaleList])))
+medianSalesPrice.append(median([x.SellingPrice for x in prior7To12MonthsSaleList]))
+medianSalesPrice.append(median([x.SellingPrice for x in prior4To6MonthsSaleList]))
+medianSalesPrice.append(median([x.SellingPrice for x in prior3MonthsSaleList]))
 
 medianSalesDOM = [] #Median Comparable Sales DOM
-medianSalesDOM.append(median(sorted([x.DOM for x in prior7To12MonthsSaleList])))
-medianSalesDOM.append(median(sorted([x.DOM for x in prior4To6MonthsSaleList])))
-medianSalesDOM.append(median(sorted([x.DOM for x in prior3MonthsSaleList])))
+medianSalesDOM.append(median([x.DOM for x in prior7To12MonthsSaleList]))
+medianSalesDOM.append(median([x.DOM for x in prior4To6MonthsSaleList]))
+medianSalesDOM.append(median([x.DOM for x in prior3MonthsSaleList]))
 
 medianListPrice = [] #Median Comparable List Price
-medianListPrice.append(median(sorted([x.ListingPrice for x in prior7To12MonthsActiveList])))
-medianListPrice.append(median(sorted([x.ListingPrice for x in prior4To6MonthsActiveList])))
-medianListPrice.append(median(sorted([x.ListingPrice for x in prior3MonthsActiveList])))
+medianListPrice.append(median([x.ListingPrice for x in prior7To12MonthsActiveList]))
+medianListPrice.append(median([x.ListingPrice for x in prior4To6MonthsActiveList]))
+medianListPrice.append(median([x.ListingPrice for x in prior3MonthsActiveList]))
 
 medianListDOM = [] #Median Comparable Listings DOM
-medianListDOM.append(median(sorted([x.DOM for x in prior7To12MonthsActiveList])))
-medianListDOM.append(median(sorted([x.DOM for x in prior4To6MonthsActiveList])))
-medianListDOM.append(median(sorted([x.DOM for x in prior3MonthsActiveList])))
+medianListDOM.append(median([x.DOM for x in prior7To12MonthsActiveList]))
+medianListDOM.append(median([x.DOM for x in prior4To6MonthsActiveList]))
+medianListDOM.append(median([x.DOM for x in prior3MonthsActiveList]))
 
 medianSaleOverList = [] #Median Sale Price as % of List Price
-medianSaleOverList.append(median(sorted([x.SellingPrice/x.ListingPrice for x in prior7To12MonthsSaleList])))
-medianSaleOverList.append(median(sorted([x.SellingPrice/x.ListingPrice for x in prior4To6MonthsSaleList])))
-medianSaleOverList.append(median(sorted([x.SellingPrice/x.ListingPrice for x in prior3MonthsSaleList])))
+medianSaleOverList.append(median([x.SellingPrice/x.ListingPrice for x in prior7To12MonthsSaleList]))
+medianSaleOverList.append(median([x.SellingPrice/x.ListingPrice for x in prior4To6MonthsSaleList]))
+medianSaleOverList.append(median([x.SellingPrice/x.ListingPrice for x in prior3MonthsSaleList]))
 
 # --- Print Results --- #
 from prettytable import PrettyTable

@@ -1,0 +1,14 @@
+Based on a research on all the sold properties within of sujbect property, the following market conditions were drawn.  The foreclosure rate is about 9% in this area over the last twelve months.  The median sale prices have inclined about 11% while the median list prices have inclined about 14% over the last twelve months.  The median days on market have slightly decreased.  The median sale price is as 97% of the list price in the last three months.  This is a inclined Market.
+
+
+
++------------------------------+------------+------------+-------------+
+| Selling Price Statistics     | Low        | High       | Predominate |
++------------------------------+------------+------------+-------------+
+|            Price             |  15500.0   |  860000.0  |   310000.0  |
++------------------------------+------------+------------+-------------+
++------------------------------+------------+------------+-------------+
+| Age Statistics               | Low        | High       | Predominate |
++------------------------------+------------+------------+-------------+
+|             Age              |     1      |    106     |      75     |
++------------------------------+------------+------------+-------------+

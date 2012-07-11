@@ -1,0 +1,4 @@
+1.  Add Effective Date
+2.  Add Plot
+3.  Integrate Plot and Table
+4.  Add Wintotal AutoIt Scripting!

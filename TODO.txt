@@ -2,3 +2,55 @@
 2.  Add Plot
 3.  Integrate Plot and Table
 4.  Add Wintotal AutoIt Scripting!
+
+
+
+Note to John for auto script for comps:
+
+1. Not all column names are the same: eg. for HUD, there are DOM/CDOM, Kitchen, and Amentities. 
+While for FNMA it's different.
+2. sell price for sold comps, if not sold, listing price for listing
+3. DOM or CDOM for listing
+4. Verification source: MLS Data Bank and City/Cnty Records
+5. Sales or financing: Ownership (Goverment or bank, REO; Private: could be ArmLth or 
+    short sale, needs to look at the Remarks for clues. Also, Relcation Sale; Contract owned is Nonarmeslenenth)
+6. cannot export remarks
+7. Financing: for listing if Conventinal is lsited, always use it. and use 0 for listing. 
+8. Date of Sale/Time: for sold, Settle, C and S,if contigent date not avialbe, use Pedning Date.  for listing, active
+9. Location: By Default put in, N;Residential
+10. Leashold/Fee Simple: Fee Simple By Default
+11. Site has to come from County Recrods. Leave open unless when can import that too.
+12. View: Same as Location.
+13. Design: from Style. If it says: 1.5 Sty or 2 Sty or anything deal with Sty, put in Traditional. 
+14. Always do "=0 " for Quality of construction and Condition. 
+15. Age, if it's more than 1800, do the math
+16. For Room Count, Do "#Total"for total, Upper and main Bed for Bdrms, Bathroom is tricky.
+ we only count main and upper as well but it has to be in the format of X.X. So it will be Full Bath and Half Bath. 
+17. GrossLivingArea use Square Footage.
+18. Basement & Finish: Use Square footage from Basement Squre Footage. if none exists, use 0.
+    if the square footage is not given, but a descripton of Full basement is present, use the GLA.
+    Crawl space, use 0. Partial Basement use about 50% of GLA. 
+    If Partial Finished is descripted in description enter about 30%-50% of the GLA.
+    Look for Walk-Out, Walk-Up in Description, if not, enter interior only. 
+    If the lower level bath room exists, always do partial finished baseemtn. 
+19. Rooms Below Grade, Look for counts in Lower Beds, Low FUll and Half Bath, also, look for
+    things in basement description for rooms.
+20. Funcational Utility: ALways Average
+21. Heating/Cooling: Look for Heat Sources and Heat: if Gas/Electrical exists and Forced Air exists, Enter GFWA
+    Colling, if Central-Electric exists, enter Central. "GFWA/Central" or "EFWA/Central"
+22. Energy Efficient Items: Always "Storm Sash"
+23. Garage/Carport: Look for # first, in #garage or # carport. then in the parking description,
+    tell what kind of parking. Look for Attached, Detached, Tuck-under, ask ying what to put in.
+24. Porch/Patio/Deck: Look in Misc for information. 
+25. DOM/CDOM: look for info in these fields to put in.
+26. Kitchen: Put in "Normal"by default unless Updated or Custom Cabinetary is mentioned in Kitchen Desc.
+27. Amentities: Look in Lot Description for "Fencing"or Partial Fencing, if exists, put in Fencing.
+    Also, look for # Fireplace and Fireplace Type, if Non Funcion if mentioned, then do not count it.
+    if not, count the fireplaces. So The End product shoudl be "Fencing" or "2 Fireplaces" or "FNC/2 FPLs"
+
+
+Information to get from Tax Record:
+1. Site: Lot Sq Ft.
+2. Also, if no age information avaialbe from MLS sheet, use this.
+3. If no GLA info from MLS, USe this. 
+4. Date of Prior Sale: cannot be exported. 

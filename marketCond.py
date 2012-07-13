@@ -164,36 +164,65 @@ prior3MonthsActiveList = list(filter(isActivePrior3Months, listing))
 #Foreclosure Rate
 foreclosureRate = len(list(filter(isForeclosure, listing))) / len(listing)
 
-#Median Sale Price Trend
-median7To12MonthsSalePrice = median(sorted([x.SellingPrice for x in prior7To12MonthsSaleList]))
-median3MonthsSalePrice = median(sorted([x.SellingPrice for x in prior3MonthsSaleList]))
-medianSalePriceTrend = []
-if median7To12MonthsSalePrice < median3MonthsSalePrice:
-    medianSalePriceTrend.append((median3MonthsSalePrice - median7To12MonthsSalePrice)/median7To12MonthsSalePrice)
+medianSalesPrice = [] #Median Comparable Sale Price
+medianSalesPrice.append(median(sorted([x.SellingPrice for x in prior7To12MonthsSaleList])))
+medianSalesPrice.append(median(sorted([x.SellingPrice for x in prior4To6MonthsSaleList])))
+medianSalesPrice.append(median(sorted([x.SellingPrice for x in prior3MonthsSaleList])))
+
+medianSalePriceTrend = [] #Median Sale Price Trend
+if medianSalePrice[0] < medianSalePrice[2]:
+    medianSalePriceTrend.append((medianSalePrice[2] - medianSalePrice[0])/medianSalePrice[0])
     medianSalePriceTrend.append('inclined')
 else:
-    medianSalePriceTrend.append((median7To12MonthsSalePrice - median3MonthsSalePrice)/median7To12MonthsSalePrice)
+    medianSalePriceTrend.append((medianSalePrice[0] - medianSalePrice[2])/medianSalePrice[0])
     medianSalePriceTrend.append('declined')
 
-#Median Listing Price Trend
-median7To12MonthsListingPrice = median(sorted([x.ListingPrice for x in prior7To12MonthsActiveList]))
-median4To6MonthsListingPrice = median(sorted([x.ListingPrice for x in prior4To6MonthsActiveList]))
-medianListingPriceTrend = []
-if median7To12MonthsListingPrice < median4To6MonthsListingPrice:
-    medianListingPriceTrend.append((median4To6MonthsListingPrice - median7To12MonthsListingPrice)/median7To12MonthsListingPrice)
+medianSalesDOM = [] #Median Comparable Sales DOM
+medianSalesDOM.append(median(sorted([x.DOM for x in prior7To12MonthsSaleList])))
+medianSalesDOM.append(median(sorted([x.DOM for x in prior4To6MonthsSaleList])))
+medianSalesDOM.append(median(sorted([x.DOM for x in prior3MonthsSaleList])))
+medianSalesDOMTrend = 'increased' if medianSalesDOM[0] < medianSalesDOM[2] else 'decreased';
+
+medianListPrice = [] #Median Comparable List Price
+medianListPrice.append(median(sorted([x.ListingPrice for x in prior7To12MonthsActiveList])))
+medianListPrice.append(median(sorted([x.ListingPrice for x in prior4To6MonthsActiveList])))
+medianListPrice.append(median(sorted([x.ListingPrice for x in prior3MonthsActiveList])))
+
+medianListingPriceTrend = [] #Median Listing Price Trend
+if medianListingPrice[0] < medianListingPrice[1]:
+    medianListingPriceTrend.append((medianListingPrice[1] - medianListingPrice[0])/medianListingPrice[0])
     medianListingPriceTrend.append('inclined')
 else:
-    medianListingPriceTrend.append((median7To12MonthsListingPrice - median4To6MonthsListingPrice)/median7To12MonthsListingPrice)
+    medianListingPriceTrend.append((medianListingPrice[0] - medianListingPrice[1])/medianListingPrice[0])
     medianListingPriceTrend.append('declined')
-    
-#Median DOM Trend
-median7To12MonthsDOM = median(sorted([x.DOM for x in prior7To12MonthsSaleList]))
-median3MonthsDOM = median(sorted([x.DOM for x in prior3MonthsSaleList]))
-medianDOMTrend = 'increased' if median7To12MonthsDOM < median3MonthsDOM else 'decreased';
-    
-#Median Latest Sale / List Price
-median3MonthsSaleOverList = median(sorted([x.SellingPrice/x.ListingPrice for x in prior3MonthsSaleList]))
 
+medianListDOM = [] #Median Comparable Listings DOM
+medianListDOM.append(median(sorted([x.DOM for x in prior7To12MonthsActiveList])))
+medianListDOM.append(median(sorted([x.DOM for x in prior4To6MonthsActiveList])))
+medianListDOM.append(median(sorted([x.DOM for x in prior3MonthsActiveList])))
+medianListDOMTrend = 'increased' if medianListDOM[0] < medianListDOM[2] else 'decreased';
+
+medianSaleOverList = [] #Median Sale Price as % of List Price
+medianSaleOverList.append(median(sorted([x.SellingPrice/x.ListingPrice for x in prior7To12MonthsSaleList])))
+medianSaleOverList.append(median(sorted([x.SellingPrice/x.ListingPrice for x in prior4To6MonthsSaleList])))
+medianSaleOverList.append(median(sorted([x.SellingPrice/x.ListingPrice for x in prior3MonthsSaleList])))
+
+marketTrend = ""
+if medianSalePriceTrend[0] < -0.05:
+    marketTrend = "declining"
+elif medianSalePriceTrend[0] > 0.05:
+    marketTrend = "inclining"
+else:
+    marketTrend = "stable"
+
+salesTable = PrettyTable(["Median Sale & List Price, DOM, Sale/List %        ", "Prior 7-12 Months", "Prior 4-6 Months", "Current - 3 Months", "Overall Trend"])
+salesTable.add_row(["Median Comparable Sale Price", medianSalesPrice[0], medianSalesPrice[1], medianSalesPrice[2], "NA"])
+salesTable.add_row(["Median Comparable Sales Days on Market", medianSalesDOM[0], medianSalesDOM[1], medianSalesDOM[2], "NA"])
+salesTable.add_row(["Median Comparable List Price", medianListPrice[0], medianListPrice[1], medianListPrice[2], "NA"])
+salesTable.add_row(["Median Comparable Listings Days on Market", medianListDOM[0], medianListDOM[1], medianListDOM[2], "NA"])
+salesTable.add_row(["Median Sale Price as % of List Price", '{0:.2%}'.format(medianSaleOverList[0]), '{0:.2%}'.format(medianSaleOverList[1]), '{0:.2%}'.format(medianSaleOverList[2]), "NA"])
+salesTable.align = 'l'
+    
 sellingPriceStat = [min([x.SellingPrice for x in listing]), 
                     max([x.SellingPrice for x in listing]),
                     pred([x.SellingPrice for x in listing])]
@@ -212,6 +241,8 @@ ageTable.align = 'c'
 
 outputFile = os.path.splitext(inputFile)[0] + '_sum.txt'
 with open(outputFile, 'w') as outfile:
+    outfile.write(salesTable.get_string())
+    outfile.write("\n\n\n")
     outfile.write(
 "Based on a research on all the sold properties within of sujbect property, \
 the following market conditions were drawn.  \
@@ -225,9 +256,9 @@ This is a {7} Market.\n\n\n\n".format(foreclosureRate,
                                       medianSalePriceTrend[0], 
                                       medianListingPriceTrend[1], 
                                       medianListingPriceTrend[0],
-                                      medianDOMTrend,
-                                      median3MonthsSaleOverList, 
-                                      medianSalePriceTrend[1]));
+                                      medianSalesDOMTrend,
+                                      medianSaleOverList[2], 
+                                      marketTrend));
     outfile.write(sellingPriceTable.get_string())
     outfile.write('\n')
     outfile.write(ageTable.get_string())

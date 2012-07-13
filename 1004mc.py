@@ -208,3 +208,27 @@ with open(outputFile, 'w') as outfile:
     outfile.close()
     
 subprocess.call(['C:/WINDOWS/System32/Notepad.exe', outputFile])
+
+d = dict([(x.SellingDate, x.SellingPrice) for x in listing if x.Status == 'Sold'])
+
+dateAxis = []
+priceAxis = []
+for date in sorted(d.keys()):
+    dateAxis.append(date)
+    priceAxis.append(d[date])
+    
+avgPriceAxis = []
+for i, date in enumerate(dateAxis):
+    avgPriceAxis.append(sum(priceAxis[0:i+1]) / len(priceAxis[0:i+1]))
+
+
+#show()
+plt.subplot(111)
+plt.grid()
+fig = plt.gcf()
+fig.set_size_inches(20, 8)
+p = plt.plot(dateAxis, priceAxis, dateAxis, avgPriceAxis)
+plt.legend(p, ["Selling Price", "Trend(Average Price)"])
+
+outputFile = os.path.splitext(inputFile)[0] + '_graph.png'
+plt.savefig(outputFile, dpi=100)

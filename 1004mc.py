@@ -4,7 +4,11 @@ import csv
 import sys
 import os.path
 import subprocess
+import matplotlib.pyplot as plt
 
+#--- Set Effective Date ---#
+effectiveDate = None
+#effectiveDate = date(2012, 7, 10)
 
 class Property:
     pass
@@ -104,7 +108,7 @@ with open(inputFile, 'r') as infile:
 
 
 # --- Calculate Results --- #
-p3date = date.today()
+p3date = effectiveDate or date.today()
 if p3date.month > 3:
     p3date = p3date.replace(p3date.year, p3date.month-3, p3date.day)
 else:
@@ -146,9 +150,9 @@ numCompActive.append(len(prior4To6MonthsActiveList))
 numCompActive.append(len(prior3MonthsActiveList))
 
 numMonthsOfSupply = [] #Number of Months of Housing Supply
-numMonthsOfSupply.append(numCompActive[0] / absorpRate[0])
-numMonthsOfSupply.append(numCompActive[1] / absorpRate[1])
-numMonthsOfSupply.append(numCompActive[2] / absorpRate[2])
+numMonthsOfSupply.append(numCompActive[0] / absorpRate[0] if absorpRate[0] != 0 else -1)
+numMonthsOfSupply.append(numCompActive[1] / absorpRate[1] if absorpRate[1] != 0 else -1)
+numMonthsOfSupply.append(numCompActive[2] / absorpRate[2] if absorpRate[2] != 0 else -1)
 
 medianSalesPrice = [] #Median Comparable Sale Price
 medianSalesPrice.append(median(sorted([x.SellingPrice for x in prior7To12MonthsSaleList])))

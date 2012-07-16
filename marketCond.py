@@ -170,11 +170,11 @@ medianSalesPrice.append(median(sorted([x.SellingPrice for x in prior4To6MonthsSa
 medianSalesPrice.append(median(sorted([x.SellingPrice for x in prior3MonthsSaleList])))
 
 medianSalePriceTrend = [] #Median Sale Price Trend
-if medianSalePrice[0] < medianSalePrice[2]:
-    medianSalePriceTrend.append((medianSalePrice[2] - medianSalePrice[0])/medianSalePrice[0])
+if medianSalesPrice[0] < medianSalesPrice[2]:
+    medianSalePriceTrend.append((medianSalesPrice[2] - medianSalesPrice[0])/medianSalesPrice[0])
     medianSalePriceTrend.append('inclined')
 else:
-    medianSalePriceTrend.append((medianSalePrice[0] - medianSalePrice[2])/medianSalePrice[0])
+    medianSalePriceTrend.append((medianSalesPrice[0] - medianSalesPrice[2])/medianSalesPrice[0])
     medianSalePriceTrend.append('declined')
 
 medianSalesDOM = [] #Median Comparable Sales DOM
@@ -189,11 +189,11 @@ medianListPrice.append(median(sorted([x.ListingPrice for x in prior4To6MonthsAct
 medianListPrice.append(median(sorted([x.ListingPrice for x in prior3MonthsActiveList])))
 
 medianListingPriceTrend = [] #Median Listing Price Trend
-if medianListingPrice[0] < medianListingPrice[1]:
-    medianListingPriceTrend.append((medianListingPrice[1] - medianListingPrice[0])/medianListingPrice[0])
+if medianListPrice[0] < medianListPrice[1]:
+    medianListingPriceTrend.append((medianListPrice[1] - medianListPrice[0])/medianListPrice[0])
     medianListingPriceTrend.append('inclined')
 else:
-    medianListingPriceTrend.append((medianListingPrice[0] - medianListingPrice[1])/medianListingPrice[0])
+    medianListingPriceTrend.append((medianListPrice[0] - medianListPrice[1])/medianListPrice[0])
     medianListingPriceTrend.append('declined')
 
 medianListDOM = [] #Median Comparable Listings DOM

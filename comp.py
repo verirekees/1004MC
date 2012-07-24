@@ -80,159 +80,165 @@ with open(inputFile, 'r') as infile:
         n+=1
         listing.append(property)
 
-p = listing[0]
+#p = listing[0]
 autoit = win32com.client.Dispatch("AutoItX3.Control")
-autoit.WinActivate("WinTOTAL - 1231 Purdue Avenue")
+autoit.WinActivate("WinTOTAL - 9877 Zenith Drive")
 
-#for i, p in enumerate(listing):
+for i, p in enumerate(listing):
+    #if i > 1:
+    #    break
 
     #Address
-autoit.Send(str(p.StreetNumber) + ' ' + str(p.StreetName) + "{ENTER}")
-autoit.Send(str(p.City) + "{ENTER}")
-autoit.Send(str(p.State) + "{ENTER}")
-autoit.Send(str(p.ZipCode) + "{ENTER}")
+    autoit.Send(str(p.StreetNumber) + ' ' + str(p.StreetName) + "{ENTER}")
+    autoit.Send(str(p.City) + "{ENTER}")
+    autoit.Send(str(p.State) + "{ENTER}")
+    autoit.Send(str(p.ZipCode) + "{ENTER}")
 
     #Proximity to Subject
-autoit.Send("{ENTER}")
+    autoit.Send("{ENTER}")
 
     #Sale Price (TODO need listing if selling not available)
-if p.SellingPrice > 0:
-    autoit.Send(str(p.SellingPrice) + "{ENTER}")
-else:
-    autoit.Send(str(p.ListingPrice) + "{ENTER}")
+    if p.SellingPrice > 0:
+        autoit.Send(str(int(p.SellingPrice)) + "{ENTER}")
+    else:
+        autoit.Send(str(int(p.ListingPrice)) + "{ENTER}")
     
     #Data Sources
-autoit.Send("Maris{#}" + str(p.MLNumber) + "{ENTER}")
-
-    # #DOM (TODO need CDOM if DOM not available)
-autoit.Send(str(p.DOM) + "{ENTER}")
+    autoit.Send("Maris{#}" + str(p.MLNumber) + "{ENTER}")
+    autoit.Send(str(p.DOM) + "{ENTER}")
 
     # #Verification Source
-autoit.Send("MLS Data Bank; City/Cnty Records" + "{ENTER}")
+    autoit.Send("MLS Data Bank; City/Cnty Records" + "{ENTER}")
 
     # #Sales or Financing Concessions (TODO)
-autoit.Send("{ENTER}")
-autoit.Send("{ENTER}") #adjustment column
-autoit.Send(p.Financing + "{ENTER}") #Financing Type
-autoit.Send("{ENTER}") #Other description:
-autoit.Send(str(0) + "{ENTER}") #Concession amount (TODO)
-autoit.Send("{ENTER}") #adjustment column
+    autoit.Send("{ENTER}")
+    autoit.Send("{ENTER}") #adjustment column
+    autoit.Send(p.Financing + "{ENTER}") #Financing Type
+    autoit.Send("{ENTER}") #Other description:
+    autoit.Send(str(0) + "{ENTER}") #Concession amount (TODO)
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Date of Sale/Time
-autoit.Send("{ENTER}") #Status of Comp
-autoit.Send("{SPACE}") #Contract Date Boolean
-autoit.Send("{ENTER}") #Contract Date
-autoit.Send("{ENTER}") #Settlement Date
-autoit.Send("{ENTER}") #Withdrawal Date
-autoit.Send("{ENTER}") #Expiration Date
-autoit.Send("{ENTER}") #adjustment column
+    autoit.Send("Active{ENTER}") #Status of Comp
+    autoit.Send("{ENTER}{ENTER}") #Contract Date Boolean
+    autoit.Send("{ENTER}") #Contract Date
+    autoit.Send("{ENTER}") #Settlement Date
+    autoit.Send("{ENTER}") #Withdrawal Date
+    autoit.Send("{ENTER}") #Expiration Date
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Location
-autoit.Send("Neutral" + "{ENTER}") #Overall
-autoit.Send("Residential" + "{ENTER}") #Factor 1
-autoit.Send("{ENTER}") #Desc 1
-autoit.Send("{ENTER}") #Factor 2
-autoit.Send("{ENTER}") #Desc 2
-autoit.Send("{ENTER}") #adjustment column
+    autoit.Send("Neutral" + "{ENTER}") #Overall
+    autoit.Send("Residential" + "{ENTER}") #Factor 1
+    autoit.Send("{ENTER}") #Desc 1
+    autoit.Send("{ENTER}") #Factor 2
+    autoit.Send("{ENTER}") #Desc 2
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Leasehold/Fee Simple
-# autoit.Send("Fee Simple" + "{ENTER}")
-# autoit.Send("{ENTER}") #adjustment column
+    autoit.Send("Fee Simple" + "{ENTER}")
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Site
-# autoit.Send("{ENTER}")
-# autoit.Send("{ENTER}") #adjustment column
+    autoit.Send("{ENTER}")
+    autoit.Send("{ENTER}") #adjustment column
 
     # #View Overall
-# autoit.Send("Neutral" + "{ENTER}") #Overall
-# autoit.Send("Residential" + "{ENTER}") #Factor 1
-# autoit.Send("{ENTER}") #Desc 1
-# autoit.Send("{ENTER}") #Factor 2
-# autoit.Send("{ENTER}") #Desc 2
-# autoit.Send("{ENTER}") #adjustment column
+    autoit.Send("Neutral" + "{ENTER}") #Overall
+    autoit.Send("Residential" + "{ENTER}") #Factor 1
+    autoit.Send("{ENTER}") #Desc 1
+    autoit.Send("{ENTER}") #Factor 2
+    autoit.Send("{ENTER}") #Desc 2
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Design (Style)
-# autoit.Send(p.Style + "{ENTER}")
-# autoit.Send("{ENTER}") #adjustment column
+    autoit.Send(p.Style + "{ENTER}")
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Quality of Construction
-# autoit.Send("=0" + "{ENTER}")
-# autoit.Send("{ENTER}") #adjustment column
+    autoit.Send("=0")
+    autoit.Sleep(200)
+    autoit.Send("{ENTER}")
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Actual Age
-# autoit.Send(str(p.Age) + "{ENTER}")
-# autoit.Send("{ENTER}") #adjustment column
+    autoit.Send(str(p.Age) + "{ENTER}")
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Condition
-# autoit.Send("=0" + "{ENTER}")
-# autoit.Send("{ENTER}") #adjustment column
+    autoit.Send("=0")
+    autoit.Sleep(200)
+    autoit.Send("{ENTER}")
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Above Grade
-# autoit.Send("{ENTER}") #adjustment column
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Room Count
-# autoit.Send(str(p.Room)+ "{ENTER}") #Total
-# autoit.Send(str(p.MainUpperBedrooms) + "{ENTER}") #Bedrooms
-# fullbath = p.MainFullBaths + p.UpperFullBaths
-# halfbath = p.MainHalfBaths + p.UpperHalfBaths
-# autoit.Send(str(fullbath) + '.' + str(halfbath) + "{ENTER}") #Baths
-# autoit.Send("{ENTER}") #adjustment column
+    autoit.Send(str(p.Room)+ "{ENTER}") #Total
+    autoit.Send(str(p.MainUpperBedrooms) + "{ENTER}") #Bedrooms
+    fullbath = p.MainFullBaths + p.UpperFullBaths
+    halfbath = p.MainHalfBaths + p.UpperHalfBaths
+    autoit.Send(str(fullbath) + '.' + str(halfbath) + "{ENTER}") #Baths
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Gross Living Area
-# autoit.Send(str(p.SqFt) + "{ENTER}")
-# autoit.Send("{ENTER}") #adjustment column
+    autoit.Send(str(p.SqFt) + "{ENTER}")
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Basement & Finished Rooms Below Grade 
-# autoit.Send(p.BasementSqFt + "{ENTER}") #Area Sq Ft
-# autoit.Send("{ENTER}") #Finished Sq Ft
-# autoit.Send("{ENTER}") #Basement Exit
-# autoit.Send("{ENTER}") #adjustment column
-# autoit.Send("{ENTER}") #Rec Room
-# autoit.Send(str(p.LowerBedrooms) + "{ENTER}") #Bedrooms
-# autoit.Send(str(p.LowerFullBaths) + '.' + str(p.LowerHalfBaths) + "{ENTER}") #Bathrooms
-# autoit.Send("{ENTER}") #Other Rooms
-# autoit.Send("{ENTER}") #adjustment column
+    autoit.Send(str(p.BasementSqFt) + "{ENTER}") #Area Sq Ft
+    autoit.Send("{ENTER}") #Finished Sq Ft
+    autoit.Send("{ENTER}") #Basement Exit
+    autoit.Send("{ENTER}") #adjustment column
+    autoit.Send("{ENTER}") #Rec Room
+    autoit.Send(str(p.LowerBedrooms) + "{ENTER}") #Bedrooms
+    autoit.Send(str(p.LowerFullBaths) + '.' + str(p.LowerHalfBaths) + "{ENTER}") #Bathrooms
+    autoit.Send("{ENTER}") #Other Rooms
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Functional Utility
-# autoit.Send("Average" + "{ENTER}")
-# autoit.Send("{ENTER}") #adjustment column
+    autoit.Send("Average" + "{ENTER}")
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Heating/Cooling
-# autoit.Send(p.Heating + "{ENTER}")
-# autoit.Send("{ENTER}") #adjustment column
+    autoit.Send(p.Heating + "{ENTER}")
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Energy Efficient Items
-# autoit.Send("Storm Sash" + "{ENTER}")
-# autoit.Send("{ENTER}") #adjustment column
+    autoit.Send("Storm Sash" + "{ENTER}")
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Garage/Carport
-# autoit.Send("{ENTER}")
-# autoit.Send("{ENTER}") #adjustment column
+    autoit.Send("{ENTER}")
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Porch/Patio/Deck
-# autoit.Send("{ENTER}")
-# autoit.Send("{ENTER}") #adjustment column
+    autoit.Send("{ENTER}")
+    autoit.Send("{ENTER}") #adjustment column
 
     # #DOM/CDOM
-# autoit.Send(str(p.DOM) + "{ENTER}")
-# autoit.Send("{ENTER}") #adjustment column
+    domStr = str(p.DOM) if p.DOM > 0 else "n/a"
+    domStr += "/" + str(p.CDOM)
+    autoit.Send(domStr + "{ENTER}")
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Kitchen
-# autoit.Send("Normal" + "{ENTER}")
-# autoit.Send("{ENTER}") #adjustment column
+    autoit.Send("Normal" + "{ENTER}")
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Amenities
-# autoit.Send("{ENTER}")
-# autoit.Send("{ENTER}") #adjustment column
+    autoit.Send("{ENTER}")
+    autoit.Send("{ENTER}") #adjustment column
 
     # #Date of Prior S/T
-# autoit.Send("{ENTER}")
+    autoit.Send("{ENTER}")
 
     # #Price of Prior S/T
-# autoit.Send("{ENTER}")
+    autoit.Send("{ENTER}")
 
     # #Data Source(s)
-# autoit.Send("{ENTER}")
+    autoit.Send("MLS & County Records"+"{ENTER}")
 
     # #Effective Date
-# autoit.Send("{ENTER}")
+    autoit.Send(date.today().strftime("%m/%d/%Y") + "{ENTER}")

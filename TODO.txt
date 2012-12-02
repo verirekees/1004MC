@@ -1,3 +1,23 @@
+Dec 1 2012
+
+Sales or Financing: when they are active, use listing
+concessions: amount not accurate
+Basement & Finish: not accurent.
+Garage/Carport: Detached, spelled wrong. Carport needs to be spelled out.
+Amentities: when there is none, say None.
+
+
+
+Paired Comparision:
+
+two similar properties in the same neighborhood, with just 1 attribute different. 
+
+
+
+
+
+8/1/2012
+
 1.  Add Effective Date
 2.  Add Plot
 3.  Integrate Plot and Table
